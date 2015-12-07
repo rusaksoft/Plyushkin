@@ -1,0 +1,5 @@
+.vagrant
+*.pyc
+*.bkp
+*.sqlite3
+*.so
