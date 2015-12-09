@@ -18,6 +18,17 @@ class Storage(models.Model):
 	password = models.TextField()
 	url = models.TextField()
 
+	last_check = models.DateTimeField(null = True, blank = True)
+
+	#restrictions, in MB
+	max_space = models.IntegerField(blank=True, null = True)
+	
+	#restrictions on some backup spaces
+	max_file_count = models.IntegerField(blank=True, null = True) 
+
+	def free_space_status(self):
+		return "No info"
+
 	def __str__(self):
 		return self.name or self.url
 

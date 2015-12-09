@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="container">
+      <div style="margin: 5px">
+        <a class="btn btn-default" href="{% url 'check' %}" role="button">Check free space now</a>
+      </div>
+      <table class="table">
+      <tr>
+        <th>Storage name</th>
+        <th>Type</th>
+        <th>Url</th>
+        <th>Last check</th> 
+        <th>Free space</th>
+      </tr>
+      {% for storage in storages %}
+      <tr>
+        <td>{{storage.name}}</td>
+        <td>{{storage.access_type}}</td>
+        <td>{{storage.url}}</td>
+        <td>{{storage.last_check}}</td>
+        <td>{{storage.free_space_status}}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+{% endblock content %}

@@ -20,3 +20,8 @@ def check(request):
 	bacumon.check_all()
 
 	return redirect("index")
+
+def storages(request):
+
+	storages = Storage.objects.all()
+	return render(request, 'storages/index.html',{'storages':storages})
