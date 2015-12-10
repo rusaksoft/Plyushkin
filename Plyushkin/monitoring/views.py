@@ -30,4 +30,4 @@ def storages_check(request):
 
 	bacumon.check_storages()
 
-	return  HttpResponse("You're looking at check")
+	return redirect("storages")

@@ -83,3 +83,38 @@ def check_week1_2_last_file_date(action):
 	action.status = max([status1, status2])
 	action.last_check = datetime.now()
 	action.save()
+
+def check_storages():
+	storages = Storage.objects.all()
+	for storage in storages:
+		check_storage(storage)
+
+def check_storage(storage):
+	if storage.max_space:
+		used_space = get_used_space(storage)
+		storage.free_space = storage.max_space - used_space/1000000
+		storage.save()
+
+
+def get_used_space(storage, path = ""):	
+	#TODO reuse backend
+
+	url = storage.access_type+"://"+storage.login + ":" + storage.password \
+	 + "@" + storage.url + path
+	dest = backend.get_backend(url)
+	
+	used_space = 0
+
+	lst = dest.list_with_attr()
+	print lst
+
+	for item in lst:
+		if item[0].startswith('d'):
+			used_space += get_used_space(storage, path + "/" + item[8])
+		else:
+			used_space += int(item[4])
+
+	print "used_space:"+str(used_space)
+
+	return used_space
+

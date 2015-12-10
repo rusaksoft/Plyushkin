@@ -26,8 +26,10 @@ class Storage(models.Model):
 	#restrictions on some backup spaces
 	max_file_count = models.IntegerField(blank=True, null = True) 
 
+	free_space = models.IntegerField(blank=True, null=True)
+
 	def free_space_status(self):
-		return "No info"
+		return str(self.free_space)+" MB"
 
 	def __str__(self):
 		return self.name or self.url
