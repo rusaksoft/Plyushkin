@@ -43,6 +43,27 @@ With duplicity in heart, but may be used with any backup tools with supported ba
 <a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current status</h1>
 
 <p>Usable proof-of-concept</p>
+
+<h1>
+<a id="functional-diagram" class="anchor" href="#functional-diagram" aria-hidden="true"><span class="octicon octicon-link"></span></a>Functional diagram</h1>
+
+<p><img src="https://raw.githubusercontent.com/rusaksoft/Plyushkin/master/Diagram.png" alt="Screenshot"></p>
+
+<h1>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h1>
+
+<pre><code>vagrant up
+</code></pre>
+
+<p>for setup admin:</p>
+
+<pre><code>vagrant ssh
+cd /var/Plyushkin
+python manage.py createsuperuser
+</code></pre>
+
+<p><a href="http://localhost:8000">http://localhost:8000</a> to view
+<a href="http://localhost:8000/admin">http://localhost:8000/admin</a> to edit via django administration</p>
         </section>
 
         <footer>
