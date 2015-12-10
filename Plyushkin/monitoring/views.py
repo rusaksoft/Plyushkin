@@ -25,3 +25,9 @@ def storages(request):
 
 	storages = Storage.objects.all()
 	return render(request, 'storages/index.html',{'storages':storages})
+
+def storages_check(request):
+
+	bacumon.check_storages()
+
+	return  HttpResponse("You're looking at check")
