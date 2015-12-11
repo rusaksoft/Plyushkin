@@ -10,6 +10,8 @@ log.setup()
 backend.import_backends()
 log.setverbosity(log.DEBUG)
 
+globals.ssl_no_check_certificate = True #TODO better to check, but way to store self-signed
+
 def check_all():
 	actions = Action.objects.all()
 
@@ -25,8 +27,6 @@ def build_url(action):
 
 
 def check(action):
-	globals.ssl_no_check_certificate = True
-
 	if action.check_method == "duplicity":
 		check_duplicity(action)
 	elif action.check_method == "simple_last_file_date":
