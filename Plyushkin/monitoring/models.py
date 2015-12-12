@@ -29,7 +29,31 @@ class Storage(models.Model):
 	free_space = models.IntegerField(blank=True, null=True)
 
 	def free_space_status(self):
-		return str(self.free_space)+" MB"
+		unit = "MB"
+		free_space = self.free_space
+		max_space = self.max_space
+		if free_space > 1000 or max_space > 1000:
+			unit = "GB"
+			free_space = free_space / 1000
+			max_space = max_space / 1000
+
+		status = str(free_space)+" "+unit
+
+		warning = False
+
+		if max_space:
+			quota = round(float(free_space)/max_space*100,2)
+			status += " of "+str(max_space)+" "+unit
+			status += " ("+str(quota)+"%)"
+
+			#warning if quota less than 5%
+			warning = quota < 5
+
+		print warning
+
+		return (status, warning)
+
+
 
 	def __str__(self):
 		return self.name or self.url

@@ -7,6 +7,13 @@ import re
 from models import *
 from datetime import datetime
 
+import sys
+
+#needed to handle ftp unicode output - directory names for example
+#TODO may break something! better to handle unicode some way
+reload(sys)  
+sys.setdefaultencoding('utf8')
+
 log.setup()
 backend.import_backends()
 log.setverbosity(log.DEBUG)

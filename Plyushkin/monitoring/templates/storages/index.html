@@ -20,7 +20,7 @@
         <td>{{storage.access_type}}</td>
         <td>{{storage.url}}</td>
         <td>{{storage.last_check}}</td>
-        <td>{{storage.free_space_status}}</td>
+        <td {% if storage.free_space_status.1 %}style="color: red"{% endif %}>{{storage.free_space_status.0}}</td>
       </tr>
       {% endfor %}
       </table>
