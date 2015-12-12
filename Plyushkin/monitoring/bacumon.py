@@ -1,6 +1,7 @@
 from duplicity import backend
 from duplicity import log
 from duplicity import globals
+from duplicity.errors import BackendException
 
 import re
 from models import *
@@ -101,6 +102,9 @@ def get_used_space(storage, path = ""):
 
 	url = storage.access_type+"://"+storage.login + ":" + storage.password \
 	 + "@" + storage.url + path
+
+	print "url:"+url
+
 	dest = backend.get_backend(url)
 	
 	used_space = 0
@@ -110,7 +114,20 @@ def get_used_space(storage, path = ""):
 
 	for item in lst:
 		if item[0].startswith('d'):
-			used_space += get_used_space(storage, path + "/" + item[8])
+			dir_name = item[8]
+			if len(item) > 9:
+				dir_name = " ".join(item[8:])
+			
+			print "dir_name:"+dir_name
+
+			if not dir_name.strip():
+				print "Error: Empty dir name"
+				continue
+
+			try:
+				used_space += get_used_space(storage, path + "/" + dir_name)
+			except BackendException, e:
+				print "BackendException: ", e
 		else:
 			used_space += int(item[4])
 
