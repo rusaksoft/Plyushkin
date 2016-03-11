@@ -101,6 +101,7 @@ def check_storage(storage):
 	if storage.max_space:
 		used_space = get_used_space(storage)
 		storage.free_space = storage.max_space - used_space/1000000
+		storage.last_check = datetime.now()
 		storage.save()
 
 
@@ -117,7 +118,7 @@ def get_used_space(storage, path = ""):
 	used_space = 0
 
 	lst = dest.list_with_attr()
-	print lst
+	# print lst
 
 	for item in lst:
 		if item[0].startswith('d'):

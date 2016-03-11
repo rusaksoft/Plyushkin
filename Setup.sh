@@ -20,7 +20,8 @@ python manage.py migrate
 
 echo "*/10 * * * * python /var/Plyushkin/manage.py runmonitor" | crontab -
 
-python manage.py runserver 0.0.0.0:8000 &
+# now in Run.sh
+# python manage.py runserver 0.0.0.0:8000 & 
 
 #python manage.py startapp monitoring
 #python manage.py createsuperuser

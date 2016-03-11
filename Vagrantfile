@@ -14,4 +14,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "Setup.sh"
 
+  config.vm.provision "shell", run: "always", path: "Run.sh"
+
 end
